@@ -1,0 +1,455 @@
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+@font-face {
+            font-family: 'Pricedown';
+            src: url('pricedown.woff2') format('woff2'),
+                 url('pricedown.ttf') format('truetype');
+        }
+
+body { 
+  font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; 
+  background: #ffffff; 
+  color: #18181b; 
+  transition: background 0.3s ease, color 0.3s ease;
+  overflow-x: hidden; 
+}
+
+.wrap { 
+  max-width: 1000px; 
+  margin: 0 auto; 
+  padding: 0 24px; 
+}
+
+/* Header Rediseñado con Grid */
+header { 
+  position: sticky; 
+  top: 0; 
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.8); 
+  backdrop-filter: blur(3px);
+  border-bottom: 1px solid #e4e4e7; 
+  padding: 15px 0; 
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.headwrap { 
+  display: grid; 
+  grid-template-columns: 1fr auto 1fr; 
+  align-items: center; 
+}
+
+/* Tipografía estilo GTA */
+.logo { 
+  font-family: 'Impact', sans-serif; 
+  font-size: 26px; 
+  letter-spacing: 1px;
+}
+
+/* Efecto Degradado en Texto */
+#brand-accent, 
+#slide-title { 
+  font-family: 'Impact', sans-serif;
+  text-transform: uppercase;
+  background-clip: text; 
+  -webkit-background-clip: text; 
+  color: transparent; 
+  transition: background-image 0.8s ease-in-out;
+}
+
+/* Navegación Centrada */
+.centered-nav { 
+  display: flex; 
+  gap: 30px; 
+  font-size: 14px; 
+  font-weight: 500; 
+}
+
+.centered-nav a { 
+  color: #71717a; 
+  text-decoration: none; 
+}
+
+.centered-nav a:hover, 
+.centered-nav a.active { 
+  color: #18181b; 
+}
+
+/* Contenedor del Interruptor */
+.theme-switch-wrapper {
+  justify-self: end; 
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* DISEÑO DEL INTERRUPTOR */
+.switch { 
+  position: relative; 
+  display: inline-block; 
+  width: 44px; 
+  height: 24px; 
+}
+
+.switch input { 
+  opacity: 0; 
+  width: 0; 
+  height: 0; 
+}
+
+.slider {
+  position: absolute; 
+  cursor: pointer; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0;
+  background-color: #ccc; 
+  font-family: 'Pricedown', sans-serif;
+  transition: .4s; 
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute; 
+  content: ""; 
+  height: 18px; 
+  width: 18px; 
+  left: 3px; 
+  bottom: 3px;
+  background-color: white; 
+  transition: .4s; 
+  border-radius: 50%;
+}
+
+input:checked + .slider:before { 
+  transform: translateX(20px); 
+}
+
+/* Banner Flotante y Sombra */
+.banner { 
+  position: relative; 
+  max-width: 900px; 
+  margin: 40px auto; 
+  height: 380px; 
+  border-radius: 20px; 
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden; 
+  transition: box-shadow 0.8s ease-in-out; 
+}
+
+/* Contenido del Banner */
+.banner-content { 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  display: flex; 
+  flex-direction: column;
+  align-items: flex-start; 
+  justify-content: flex-end;
+  padding: 0 45px 45px 45px; 
+  text-align: left; 
+  color: #ffffff; 
+  background-size: cover; 
+  background-position: center;
+  transition: opacity 0.8s ease-in-out, background 0.8s ease-in-out; 
+  opacity: 0; 
+}
+
+.banner-content.on { 
+  opacity: 1; 
+}
+
+/* Título estilo Logo Apilado */
+#slide-title { 
+  font-size: 45px; 
+  margin-bottom: 0; 
+  line-height: 0.85; 
+  text-shadow: 0 4px 20px rgba(0,0,0,0.5); 
+  text-align: center;
+}
+
+/* Imágenes de Fondo (Pon las tuyas reales) */
+.gta3-slide { background-image: linear-gradient(to right, rgba(10,15,30,0.8) 0%, rgba(10,15,30,0) 80%), url('img/img-gta-3.png'); }
+.gtavc-slide { background-image: linear-gradient(to right, rgba(25,5,20,0.8) 0%, rgba(25,5,20,0) 80%), url('img/gta-vicecity.jpg'); }
+.gtasa-slide { background-image: linear-gradient(to right, rgba(30,15,5,0.8) 0%, rgba(30,15,5,0) 80%), url('img/gta-sa.jpg'); }
+.gta4-slide { background-image: linear-gradient(to right, rgba(20,18,15,0.8) 0%, rgba(20,18,15,0) 80%), url('img/gta-4.jpg'); }
+.gta5-slide { background-image: linear-gradient(to right, rgba(14,25,20,0.8) 0%, rgba(14,25,20,0) 80%), url('img/gta-v.jpg'); }
+.gta6-slide { background-image: linear-gradient(to right, rgba(35,10,30,0.8) 0%, rgba(35,10,30,0) 80%), url('img/gta-6.jpg'); }
+
+
+/* Controles Carrusel */
+.dots { 
+  position: absolute; 
+  bottom: 20px;       
+  left: 50%;          
+  transform: translateX(-50%);
+  display: flex; 
+  gap: 10px; 
+  justify-content: center; 
+  z-index: 3;         
+}
+
+.dot { 
+  width: 10px; 
+  height: 10px; 
+  border-radius: 50%; 
+  background: rgba(255,255,255,0.3); 
+  cursor: pointer; 
+  transition: 0.3s; 
+}
+
+.dot.on { 
+  background: #ffffff; 
+  box-shadow: 0 0 10px rgba(255,255,255,0.8); 
+}
+
+/* Sección Cartas */
+.section { 
+  padding: 40px 0 80px 0; 
+}
+
+.section h2 { 
+  font-size: 24px; 
+  margin-bottom: 32px; 
+  font-weight: bold; 
+}
+
+.cards { 
+  display: flex; 
+  gap: 20px; 
+  flex-wrap: wrap; 
+}
+
+.card { 
+  flex: 1; 
+  min-width: 250px; 
+  background: #f4f4f5; 
+  border: 1px solid #e4e4e7; 
+  border-radius: 12px; 
+  padding: 24px; 
+  transition: 0.3s; 
+}
+
+.card:hover { 
+  transform: translateY(-4px); 
+}
+
+.card .tag { 
+  font-size: 12px; 
+  font-weight: bold; 
+  display: inline-block; 
+  margin-bottom: 12px; 
+  padding: 4px 8px; 
+  border-radius: 4px; 
+  background: #ffffff; 
+}
+
+.card h3 { 
+  font-size: 18px; 
+  margin-bottom: 8px; 
+}
+
+.card p { 
+  font-size: 14px; 
+  color: #71717a; 
+}
+
+/* Colores etiquetas */
+.tag.gta3 { color: #0984e3; } 
+.tag.gtavc { color: #ff007f; }
+.tag.gtasa { color: #e67e22; }
+.tag.gta4 { color: #7f8c8d; }
+.tag.gta5 { color: #8fce2b; }
+.tag.gta6 { color: #ff2a9d; }
+
+/* Footer */
+footer { 
+  border-top: 1px solid #e4e4e7; 
+  padding: 40px 0; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+}
+
+.copyright { 
+  font-size: 14px; 
+  color: #71717a; 
+}
+
+.newsletter { 
+  display: flex; 
+  gap: 8px; 
+}
+
+.newsletter input { 
+  background: #f4f4f5; 
+  border: 1px solid #e4e4e7; 
+  padding: 10px 16px; 
+  border-radius: 6px; 
+}
+
+.newsletter button { 
+  background: #18181b; 
+  color: #ffffff; 
+  border: none; 
+  padding: 10px 20px; 
+  border-radius: 6px; 
+  font-weight: bold; 
+  cursor: pointer; 
+}
+
+
+/*  MODO OSCURO */
+
+body.dark-mode { 
+  background: #09090b; 
+  color: #f4f4f5; 
+}
+
+body.dark-mode header { 
+  background: rgba(9, 9, 11, 0.8); 
+  border-bottom-color: #27272a; 
+}
+
+body.dark-mode .centered-nav a { 
+  color: #a1a1aa; 
+}
+
+body.dark-mode .centered-nav a:hover, 
+body.dark-mode .centered-nav a.active { 
+  color: #f4f4f5; 
+}
+
+body.dark-mode .card { 
+  background: #18181b; 
+  border-color: #27272a; 
+}
+
+body.dark-mode .card .tag { 
+  background: #09090b; 
+}
+
+body.dark-mode .card p { 
+  color: #a1a1aa; 
+}
+
+body.dark-mode footer { 
+  border-top-color: #27272a; 
+}
+
+body.dark-mode .copyright { 
+  color: #a1a1aa; 
+}
+
+body.dark-mode .newsletter input { 
+  background: #18181b; 
+  border-color: #27272a; 
+  color: #f4f4f5; 
+}
+
+body.dark-mode .newsletter button { 
+  background: #f4f4f5; 
+  color: #09090b; 
+}
+
+/* RESPONSIVE (Móviles y Tablets) */
+@media (max-width: 768px) {
+  
+  .wrap { 
+    padding: 0 15px; 
+  }
+  
+  .headwrap { 
+    grid-template-columns: 1fr; 
+    gap: 15px; 
+    justify-items: center; 
+    text-align: center; 
+  }
+  
+  .logo { 
+    font-size: 22px; 
+  }
+  
+  .centered-nav { 
+    gap: 15px; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    font-size: 13px; 
+  }
+  
+  .theme-switch-wrapper { 
+    justify-self: center; 
+    margin-top: 5px; 
+  }
+  
+  .banner { 
+    max-width: 100%; 
+    margin: 20px 10px; 
+    height: 300px; 
+    border-radius: 15px; 
+  }
+  
+  .banner-content { 
+      align-items: flex-start;
+      text-align: left;
+      justify-content: flex-end;
+      padding: 0 20px 35px 20px;
+  }
+  
+  /* AQUÍ LA SOLUCIÓN: El degradado cambia a 'to bottom', pero cada uno usa su imagen real */
+  .gta3-slide { background-image: linear-gradient(to bottom, rgba(10,15,30,0.8) 0%, rgba(10,15,30,0.1) 100%), url('img/img-gta-3.png'); }
+  .gtavc-slide { background-image: linear-gradient(to bottom, rgba(25,5,20,0.8) 0%, rgba(25,5,20,0.1) 100%), url('img/gta-vicecity.jpg'); }
+  .gtasa-slide { background-image: linear-gradient(to bottom, rgba(30,15,5,0.8) 0%, rgba(30,15,5,0.1) 100%), url('img/gta-sa.jpg'); }
+  .gta4-slide { background-image: linear-gradient(to bottom, rgba(20,18,15,0.8) 0%, rgba(20,18,15,0.1) 100%), url('img/gta-4.jpg'); }
+  .gta5-slide { background-image: linear-gradient(to bottom, rgba(14,25,20,0.8) 0%, rgba(14,25,20,0.1) 100%), url('img/gta-v.jpg'); }
+  .gta6-slide { background-image: linear-gradient(to bottom, rgba(35,10,30,0.8) 0%, rgba(35,10,30,0.1) 100%), url('img/gta-6.jpg'); }
+
+
+  #slide-title 
+  { 
+
+    font-size: 25px; 
+    margin-bottom: 0; 
+    line-height: 0.85;
+  }
+  
+  .cards { 
+    flex-direction: column; 
+    gap: 15px; 
+  }
+  
+  .card { 
+    width: 100%; 
+    min-width: 100%; 
+    padding: 20px; 
+  }
+  
+  .card h3 { 
+    font-size: 17px; 
+  }
+  
+  .card p { 
+    font-size: 13px; 
+  }
+  
+  footer { 
+    flex-direction: column; 
+    gap: 20px; 
+    text-align: center; 
+    padding: 30px 0; 
+  }
+  
+  .newsletter { 
+    flex-direction: column; 
+    width: 100%; 
+    max-width: 300px; 
+  }
+}
